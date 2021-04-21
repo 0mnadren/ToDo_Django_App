@@ -1,0 +1,16 @@
+{% extends "users/base.html" %}
+{% block content %}
+
+    <div class="container pt-4">
+        <h2>{{ object.title }}</h2>
+        <p class="pt-2">{{ object.content }}</p>
+    </div>
+
+    {% if object.user == user %}
+      <div class="container pt-4">
+        <a class="btns" href="{% url 'notes-update' object.id %}">Update</a>
+        <a class="btns" href="{% url 'notes-delete' object.id %}">Delete</a>
+      </div>
+    {% endif %}
+
+{% endblock content %}

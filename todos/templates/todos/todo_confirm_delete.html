@@ -1,0 +1,11 @@
+{% extends 'users/base.html' %}
+{% block content %}
+
+<form method="POST" class="pt-4">
+    {% csrf_token %}
+    <h2>Are you sure you want to delete "{{ object.title }}"?</h2>
+    <button class="btns mt-4" type="submit">Yes, Delete</button>
+    <a class="btns mt-4" href="{% url 'todos-profile' %}">Cancel</a>
+</form>
+
+{% endblock %}

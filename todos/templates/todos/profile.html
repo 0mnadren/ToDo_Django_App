@@ -1,0 +1,103 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <main role="main" class="container">
+    <div class="row">
+      <div class="col">
+        <div class="profile-bg">
+            <img src="{{ user.profile.background_image.url}}" alt="bg-picture">
+        </div>
+        <div class="row">
+          <div class="col-sm-3 pl-0 pr-0 order-1">
+            <div class="profile-info">
+              <img src="{{ user.profile.profile_image.url }}" alt="profile-pic">
+              <h4>{{ user.username }}</h4>
+              <button class="btns mt-2" id="edit-profile">Edit Profile</button>
+              <button class="btns" id="close-edit">Close Edit</button>
+
+              <div id="profile-info-div">
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <fieldset class="pr-2">
+                    <legend class="border-bottom pt-2 pb-2"><strong>Profile Info</strong></legend>
+                    {{ u_form|crispy }}
+                  </fieldset>
+                  <fieldset>
+                    <legend class="border-bottom pt-4 pb-2"><strong>Profile Pictures</strong></legend>
+                    {{ p_form|crispy }}
+                  </fieldset>
+                  <div class="d-flex justify-content-center">
+                    <button class="btns" type="submit">Update</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col order-2">
+            <div class="content-container">
+              <div>
+                <div class="todo-column">
+                  <div class="todo-header">
+                    <h4>TO-DO</h4>
+                  </div>
+                  {% for todo in todos %}
+                  <div class="todo-content">
+                    {% if todo.important %}
+                      <div class="todo-color-red">
+                        <input id="{{ todo.id }}" type="checkbox" name="todo">
+                        <label for="{{ todo.id }}">
+                          <a class="detail-link" href="{% url 'todo-detail' todo.id %}"><h5 class="{{todo.id}}">{{ todo.title }}</h5></a>
+                        </label>
+                      </div>
+                    {% else %}
+                      <div class="todo-color-green">
+                        <input id="{{ todo.id }}" type="checkbox" name="todo">
+                        <label for="{{ todo.id }}">
+                          <a class="detail-link" href="{% url 'todo-detail' todo.id %}"><h5 class="{{todo.id}}">{{ todo.title }}</h5></a>
+                        </label>
+                      </div>
+                    {% endif %}
+                      <p>{{ todo.description|truncatechars:40 }}</p>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="content-button">
+                  <a href="{% url 'todo-create' %}" class="btns-2">Create ToDo</a>
+                </div>
+
+                </div>
+
+              <div>
+                <div class="notes-column">
+                  <div class="notes-header">
+                    <h4>NOTES</h4>
+                  </div>
+                  {% for note in notes %}
+                  <div class="notes-content">
+                    <div>
+                      <ul>
+                        <div class="notes-color">
+                          <a class="detail-link" href="{% url 'notes-detail' note.id %}"><h5>{{ note.title }}</h5></a>
+                        </div>
+                        <li>{{ note.content|truncatechars:40 }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="content-button">
+                  <a href="{% url 'notes-create' %}" class="btns-2">Create Notes</a>
+                </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}
+

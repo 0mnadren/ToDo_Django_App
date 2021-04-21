@@ -1,0 +1,21 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <div class="video-div">
+    {% for video in videos %}
+    <video autoplay muted controls>
+      <source src="{{ video.video.url }}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    {% endfor %}
+  </div>
+  <div class="video-subtext">
+    <h3>Join Today - Make Plans for Tomorrow</h3>
+    <div class="video-buttons">
+      <a href="{% url 'register' %}" class="btns">Sign Up</a>
+      <a href="{% url 'login' %}" class="btns">Sign In</a>
+    </div>
+  </div>
+
+{% endblock %}
