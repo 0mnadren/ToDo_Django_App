@@ -3,15 +3,15 @@ const editButton = document.querySelector('#edit-profile');
 const closeEdit = document.querySelector('#close-edit');
 
 editButton.addEventListener('click', () => {
-    document.getElementById('edit-profile').style.visibility = 'hidden';
-    document.getElementById('close-edit').style.visibility = 'visible';
-    document.getElementById('profile-info-div').style.visibility = 'visible';
+    document.getElementById('edit-profile').style.display = 'none';
+    document.getElementById('close-edit').style.display = 'block';
+    document.getElementById('profile-info-div').style.display = 'block';
 })
 
 closeEdit.addEventListener('click', () => {
-    document.getElementById('edit-profile').style.visibility = 'visible';
-    document.getElementById('close-edit').style.visibility = 'hidden';
-    document.getElementById('profile-info-div').style.visibility = 'hidden';
+    document.getElementById('edit-profile').style.display = 'block';
+    document.getElementById('close-edit').style.display = 'none';
+    document.getElementById('profile-info-div').style.display = 'none';
 })
 
 
